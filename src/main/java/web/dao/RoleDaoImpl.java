@@ -22,8 +22,8 @@ public class RoleDaoImpl implements RoleDao{
     }
 
     @Override
-    public Set<Role> getRoleById(List<Long> idRole) {
-        TypedQuery<Role> query = entityManager.createQuery("select u from Role u where u.id in :idRole", Role.class);
-        return new HashSet<>(query.setParameter("idRole", idRole).getResultList());
+    public Set<Role> getRoleById(List<Long> id) {
+        TypedQuery<Role> query = entityManager.createQuery("select u from Role u where u.id in :id", Role.class);
+        return new HashSet<>(query.setParameter("id", id).getResultList());
     }
 }

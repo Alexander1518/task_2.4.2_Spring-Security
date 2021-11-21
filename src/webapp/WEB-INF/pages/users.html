@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Users</title>
+
+</head>
+<body>
+<h2>Users</h2>
+<style>
+  table {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    border: 1px solid lightslategrey;
+    text-align: center;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: white;
+  }
+
+</style>
+<table>
+  <tr>
+    <td>Id</td>
+    <td>Name</td>
+    <td>Surname</td>
+    <td>Email</td>
+    <td>Age</td>
+    <td>Actions</td>
+  </tr>
+
+  <tr th:each="user:${user}">
+    <td><p th:text="${user.id}"></p> </td>
+    <td><a th:href="@{/users/{id}(id=${user.id})}" th:text="${user.name}"><p th:text="${user.name}"></p></a></td>
+    <td><p th:text="${user.surname}"></p></td>
+    <td><p th:text="${user.email}"></p></td>
+    <td><p th:text="${user.age}"></p></td>
+    <td>
+      <form th:method="GET" th:action="@{/users/{id}/admin/update(id=${user.id})}">
+        <input type="submit" value="UPDATE">
+      </form>
+      <form th:method="DELETE" th:action="@{/users/{id}/admin/update(id=${user.id})}">
+        <input type="submit" value="DELETE">
+      </form>
+
+    </td>
+  </tr>
+</table>
+<br>
+<form th:method="GET" th:action="@{/admin/create}">
+  <input type="submit" value="CREATE NEW USER">
+</form>
+<br/>
+</body>
+</html>

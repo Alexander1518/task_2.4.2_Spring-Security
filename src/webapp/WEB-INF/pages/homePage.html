@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+
+</head>
+<body>
+    <div>
+        <div style="text-align: center;">
+            <th:block th:each="msg : ${messages}">
+                <h1 th:text="${msg}"></h1>
+            </th:block>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <form th:method="GET" th:action="@{/users}">
+            <input type="submit" value="MAIN MENU">
+        </form>
+    </div>
+    <div style="text-align: left;">
+        <form th:method="GET" th:action="@{/logout}">
+            <input type="submit" value="LOGOUT">
+        </form>
+    </div>
+</body>
+</html>

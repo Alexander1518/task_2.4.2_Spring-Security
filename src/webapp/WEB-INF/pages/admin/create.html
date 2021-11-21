@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>CREATE USER</title>
+
+</head>
+
+<body>
+<form th:method="POST" th:action="@{/admin/create}" th:object="${user}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+  <br/>
+  <label for="surname">Enter surname: </label>
+  <input type="text" th:field="*{surname}" id="surname"/>
+  <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+  <br/>
+  <label for="age">Enter age: </label>
+  <input type="text" th:field="*{age}" id="age"/>
+  <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
+  <br/>
+  <label for="email">Enter email: </label>
+  <input type="text" th:field="*{email}" id="email"/>
+  <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+  <br/>
+  <label for="password">Enter password: </label>
+  <input type="text" th:field="*{password}" id="password"/>
+  <br/>
+  <label>Role:
+    <select multiple="multiple" name="role" required="required">
+      <option value="3">ADMIN</option>
+      <option selected value="4">USER</option>
+    </select>
+    <br/>
+    <br/>
+    <form th:method="GET" th:action="@{/admin}">
+    <input type="submit" value="CREATE USER"/>
+</form>
+  </label>
+</form>
+<br>
+<form th:method="GET" th:action="@{/admin}">
+  <input type="submit"  value="MAIN MENU">
+</form>
+<br/>
+<form th:method="GET" th:action="@{/logout}">
+  <input type="submit" value="LOGOUT">
+</form>
+<br/>
+</body>
+</html>
