@@ -1,13 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Users</title>
-
 </head>
 
 <body>
-<h2>Users</h2>
+
+<div style="text-align: center;"><b><h1>Admin Page</h1></b></div>
+
+<div style="text-align: center;">
+  <form th:method="GET" th:action="@{/admin/create}">
+    <input type="submit" value="CREATE NEW USER">
+  </form>
+</div>
+<style>
+  table {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td, th {
+    border: 1px solid lightslategrey;
+    text-align: center;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: white;
+  }
+
+</style>
+
 <table>
   <tr>
     <td>Id</td>
@@ -35,13 +59,11 @@
     </td>
   </tr>
 </table>
-<br>
-<form th:method="GET" th:action="@{/admin}">
-  <input type="submit" value="CREATE NEW USER">
-</form>
-<br/>
-<form th:method="GET" th:action="@{/logout}">
-  <input type="submit" value="LOGOUT">
-</form>
+
+<div style="text-align: left;">
+  <form th:method="GET" th:action="@{/logout}">
+    <input type="submit" value="LOGOUT">
+  </form>
+</div>
 </body>
 </html>

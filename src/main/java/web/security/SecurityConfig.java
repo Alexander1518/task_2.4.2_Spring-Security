@@ -9,28 +9,38 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import web.service.UserService;
 
-@Configuration
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+//    private UserService userService;
+//    private LoginSuccessHandler loginSuccessHandler;
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+        auth.inMemoryAuthentication()
+                .withUser("USER")
+                .password("USER")
+                .authorities("ROLE_USER")
+                .and()
+                .withUser("ADMIN")
+                .password("ADMIN")
+                .authorities("ROLE_ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 // указываем страницу с формой логина
-                .loginPage("/login")
+               // .loginPage("/login")
                 //указываем логику обработки при логине
                 .successHandler(new LoginSuccessHandler())
                 // указываем action с формы логина
-                .loginProcessingUrl("/login")
+               // .loginProcessingUrl("/login")
                 // Указываем параметры логина и пароля с формы логина
-                .usernameParameter("j_username")
-                .passwordParameter("j_password")
+               // .usernameParameter("j_username")
+               // .passwordParameter("j_password")
                 // даем доступ к форме логина всем
                 .permitAll();
 
@@ -40,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 // указываем URL при удачном логауте
-                .logoutSuccessUrl("/login?logout")
+                //.logoutSuccessUrl()
                 //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
                 .and().csrf().disable();
 
@@ -50,7 +60,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+                .antMatchers( "/admin/**").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+//        http.authorizeRequests()
+//                .antMatchers("/admin/**").hasRole( "ADMIN")
+//                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+//                .antMatchers("/**").permitAll()
+//                .and().formLogin();
     }
 
     @Bean

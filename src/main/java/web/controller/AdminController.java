@@ -35,20 +35,19 @@ public class AdminController {
     public String createUserFrom(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("role", roleService.listRoles());
-        return "/admin/create";
+        return "create";
     }
 
     @PostMapping()
     public String createUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                           @RequestParam("role") ArrayList<Long> role) {
         if (bindingResult.hasErrors()) {
-            return "/admin/create";
+            return "create";
         }
         user.setRoles(roleService.getRoleById(role));
         userService.addUser(user);
         return "redirect:/admin";
     }
-
 
     @DeleteMapping("/{id}")
     public String deleteUserById(@PathVariable("id") long id) {
@@ -59,14 +58,14 @@ public class AdminController {
     @GetMapping("/{id}/update")
     public String updateUserForm(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "/admin/update";
+        return "update";
     }
 
     @PostMapping("/{id}")
     public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                          @RequestParam("role") ArrayList<Long> role) {
         if (bindingResult.hasErrors()) {
-            return "/admin/update";
+            return "update";
         }
         user.setRoles(roleService.getRoleById(role));
         userService.updateUser(user);

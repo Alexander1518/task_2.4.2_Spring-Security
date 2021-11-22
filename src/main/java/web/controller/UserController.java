@@ -20,18 +20,14 @@ public class UserController {
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
-
-	@RequestMapping(value = "homePage", method = RequestMethod.GET)
+	@GetMapping("/")
+	//@RequestMapping(value = "", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		String messages = "Welcome dear customers !!!";
 		model.addAttribute("messages", messages);
 		return "homePage";
 	}
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String loginPage() {
-        return "login";
-    }
 	@GetMapping("/users")
 	public String printUsers(Model model) {
 		model.addAttribute("user", userService.listUsers());

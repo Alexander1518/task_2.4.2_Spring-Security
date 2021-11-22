@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>CREATE USER</title>
+  <title>Update user</title>
 
 </head>
-
 <body>
-<form th:method="POST" th:action="@{/admin/create}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/{id}(id=${user.id})}" th:object="${user}">
   <label for="name">Enter name: </label>
   <input type="text" th:field="*{name}" id="name"/>
   <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
@@ -33,15 +32,13 @@
       <option selected value="4">USER</option>
     </select>
     <br/>
-    <br/>
-    <form th:method="GET" th:action="@{/admin}">
-    <input type="submit" value="CREATE USER"/>
-</form>
   </label>
+  <br/>
+  <input type="submit" value="UPDATE"/>
 </form>
 <br>
 <form th:method="GET" th:action="@{/admin}">
-  <input type="submit"  value="MAIN MENU">
+  <input type="submit" value="MAIN MENU">
 </form>
 <br/>
 <form th:method="GET" th:action="@{/logout}">
