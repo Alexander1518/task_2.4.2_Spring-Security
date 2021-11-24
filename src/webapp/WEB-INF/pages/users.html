@@ -20,18 +20,16 @@
     width: 100%;
   }
   td, th {
-    border: 1px solid lightslategrey;
+    border: 3px solid #000000;
     text-align: center;
     padding: 8px;
   }
 
   tr:nth-child(even) {
-    background-color: white;
+    background-color: #b9d487;
   }
 
 </style>
-
-
 <table>
   <thead>
   <tr>
@@ -46,21 +44,22 @@
 
   <tr th:each="user:${user}">
     <td><p th:text="${user.id}"></p> </td>
-    <td><p th:text="${user.name}"></p></td>
+    <td><a th:href="@{/users/{id}(id=${user.id})}" th:text="${user.name}"><p th:text="${user.name}"></p></a></td>
     <td><p th:text="${user.surname}"></p></td>
     <td><p th:text="${user.email}"></p></td>
     <td><p th:text="${user.age}"></p></td>
     <td>
-      <form th:method="GET" th:action="@{/users/{id}/admin/update(id=${user.id})}">
+      <form th:method="GET" th:action="@{/admin/{id}/update(id=${user.id})}">
         <input type="submit" value="UPDATE">
       </form>
-      <form th:method="DELETE" th:action="@{/users/{id}(id=${user.id})}">
+      <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
         <input type="submit" value="DELETE">
       </form>
 
     </td>
   </tr>
 </table>
+
 <div style="text-align: left;">
   <form th:method="GET" th:action="@{/logout}">
     <input type="submit" value="LOGOUT">

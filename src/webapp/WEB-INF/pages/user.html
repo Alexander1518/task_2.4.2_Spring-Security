@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>User table</title>
 
 </head>
 <body>
+<style>
+    table {
+        font-family: Arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td, th {
+        border: 1px solid lightslategrey;
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: white;
+    }
+
+</style>
 <h2>User:</h2>
 <div>Name:</div>
 <div th:text="${user.name}"></div>
@@ -13,11 +30,12 @@
 <div>Surname:</div>
 <div th:text="${user.surname}"></div>
 <br>
+<div>Email:</div>
+<div th:text="${user.email}"></div>
+<br>
 <div>Age:</div>
 <div th:text="${user.age}"></div>
 <br>
-<div>Email:</div>
-<div th:text="${user.email}"></div>
 <br/>
 <form sec:authorize="hasRole('ROLE_ADMIN')" th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
     <input type="submit" value="DELETE">
@@ -36,6 +54,6 @@
 </form>
 <br/>
 
-</form>
+
 </body>
 </html>

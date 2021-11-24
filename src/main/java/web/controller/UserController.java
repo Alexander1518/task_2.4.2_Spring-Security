@@ -21,7 +21,6 @@ public class UserController {
 		this.userService = userService;
 	}
 	@GetMapping("/")
-	//@RequestMapping(value = "", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		String messages = "Welcome dear customers !!!";
 		model.addAttribute("messages", messages);
