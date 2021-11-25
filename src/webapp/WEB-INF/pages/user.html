@@ -13,45 +13,57 @@
         width: 100%;
     }
     td, th {
-        border: 1px solid lightslategrey;
+        border: 3px solid #000000;
         text-align: center;
         padding: 8px;
     }
 
-    tr:nth-child(even) {
-        background-color: white;
-    }
+
 
 </style>
-<h2>User:</h2>
-<div>Name:</div>
-<div th:text="${user.name}"></div>
-<br>
-<div>Surname:</div>
-<div th:text="${user.surname}"></div>
-<br>
-<div>Email:</div>
-<div th:text="${user.email}"></div>
-<br>
-<div>Age:</div>
-<div th:text="${user.age}"></div>
-<br>
-<br/>
-<form sec:authorize="hasRole('ROLE_ADMIN')" th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
-    <input type="submit" value="DELETE">
-</form>
-<br/>
-<form sec:authorize="hasRole('ROLE_ADMIN')" th:method="GET" th:action="@{/admin/{id}/update(id=${user.id})}">
-    <input type="submit" value="UPDATE">
-</form>
-<br/>
+<table>
+    <thead>
+    <tr>
+
+        <td>Name</td>
+        <td>Surname</td>
+        <td>Email</td>
+        <td>Age</td>
+        <td>Actions</td>
+    </tr>
+    </thead>
+
+
+    <tr>
+        <td><p th:text="${user.name}"></p></td>
+
+        <td><p th:text="${user.surname}"></p></td>
+
+        <td><p th:text="${user.email}"></p></td>
+
+        <td><p th:text="${user.age}"></p></td>
+        <td>
+            <form sec:authorize="hasRole('ROLE_ADMIN')" th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
+                <input type="submit" value="DELETE">
+            </form>
+
+            <form sec:authorize="hasRole('ROLE_ADMIN')" th:method="GET" th:action="@{/admin/{id}/update(id=${user.id})}">
+                <input type="submit" value="UPDATE">
+            </form>
+        </td>
+    </tr>
+</table>
+
 <form sec:authorize="hasRole('ROLE_ADMIN')" th:method="GET" th:action="@{/admin}">
     <input type="submit" value="MAIN MENU">
 </form>
+
 <br/>
-<form th:method="GET" th:action="@{/logout}">
-    <input type="submit" value="LOGOUT">
-</form>
+<div style="text-align: left;">
+    <form th:method="GET" th:action="@{/logout}">
+        <input type="submit" value="LOGOUT">
+    </form>
+</div>
 <br/>
 
 
