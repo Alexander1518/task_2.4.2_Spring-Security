@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void addUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.addUser(user);

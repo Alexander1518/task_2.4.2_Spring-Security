@@ -1,15 +1,14 @@
 package web.model;
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
+
 @Entity
 @Table(name = "users")
-public class User implements UserDetails{
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -40,12 +39,13 @@ public class User implements UserDetails{
         this.roles = roles;
     }
 
-    public User(String name, String surname, String email, int age, String password) {
+    public User(String name, String surname, String email, int age, String password, Set<Role> roles) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.age = age;
         this.password = password;
+        this.roles = roles;
     }
 
     public long getId() {
@@ -98,19 +98,6 @@ public class User implements UserDetails{
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
     }
 
     @Override
