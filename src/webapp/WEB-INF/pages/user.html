@@ -24,39 +24,22 @@
 <table>
     <thead>
     <tr>
-
+        <td>Id</td>
         <td>Name</td>
         <td>Surname</td>
         <td>Email</td>
         <td>Age</td>
-        <td>Actions</td>
     </tr>
     </thead>
 
-
     <tr>
-        <td><p th:text="${user.name}"></p></td>
-
-        <td><p th:text="${user.surname}"></p></td>
-
-        <td><p th:text="${user.email}"></p></td>
-
-        <td><p th:text="${user.age}"></p></td>
-        <td>
-            <form sec:authorize="hasRole('ROLE_ADMIN')" th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
-                <input type="submit" value="DELETE">
-            </form>
-
-            <form sec:authorize="hasRole('ROLE_ADMIN')" th:method="GET" th:action="@{/admin/{id}/update(id=${user.id})}">
-                <input type="submit" value="UPDATE">
-            </form>
-        </td>
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getName()}"></td>
+        <td th:text="${user.getSurname()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getAge()}"></td>
     </tr>
 </table>
-
-<form sec:authorize="hasRole('ROLE_ADMIN')" th:method="GET" th:action="@{/admin}">
-    <input type="submit" value="MAIN MENU">
-</form>
 
 <br/>
 <div style="text-align: left;">
