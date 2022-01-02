@@ -31,10 +31,9 @@
   <br/>
   <br/>
   <label>Role:
-    <select id="selectively" name="role" required="required">
-      <option selected></option>
-      <option value="1">ADMIN</option>
-      <option value="2">USER</option>
+    <select multiple="multiple" name="role" required="required">
+      <option value="${role}"></option>
+      <option selected value="${role}"></option>
     </select>
     <br/>
     <br/>

@@ -32,10 +32,11 @@ public class DBInit {
 
         Set <Role> setAdmin = new HashSet<>();
         setAdmin.add(roleService.getRoleByName("ROLE_ADMIN"));
+        setAdmin.add(roleService.getRoleByName("ROLE_USER"));
         userService.addUser(new User("ADMIN", "ADMIN", "admin@mail.ru", 21, "ADMIN",setAdmin));
 
         Set <Role> setUser = new HashSet<>();
-        setAdmin.add(roleService.getRoleByName("ROLE_USER"));
+        setUser.add(roleService.getRoleByName("ROLE_USER"));
         userService.addUser(new User("USER", "USER", "user@mail.ru", 22, "USER",setUser));
     }
 }

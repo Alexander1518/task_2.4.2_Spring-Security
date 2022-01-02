@@ -39,7 +39,7 @@
     <td>Surname</td>
     <td>Email</td>
     <td>Age</td>
-
+    <td>Roles</td>
     <td>Actions</td>
   </tr>
 
@@ -49,23 +49,24 @@
     <td><p th:text="${user.surname}"></p></td>
     <td><p th:text="${user.email}"></p></td>
     <td><p th:text="${user.age}"></p></td>
-
     <td>
+      <div th:each="role : ${user.getRoles()}">
+        <p th:text="${role.getName()}"></p>
+      </div>
+    </td>
+    <td>
+      <form th:method="GET" th:action="@{/user/{id}(id=${user.id})}">
+        <input type="submit"  value="VIEWING">
+      </form>
       <form th:method="GET" th:action="@{/admin/{id}/update(id=${user.id})}">
         <input type="submit"  value="UPDATE">
       </form>
       <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
         <input type="submit"  value="DELETE">
       </form>
-
     </td>
   </tr>
 </table>
-<div style="text-align: right;">
-  <form th:method="GET" th:action="@{/users}">
-    <input type="submit" value="MAIN MENU">
-  </form>
-</div>
 <div style="text-align: left;">
   <form th:method="GET" th:action="@{/logout}">
     <input type="submit" value="LOGOUT">

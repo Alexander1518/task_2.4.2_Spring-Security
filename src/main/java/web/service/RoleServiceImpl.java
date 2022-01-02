@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.RoleDao;
 import web.model.Role;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,5 +54,10 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public Role getRoleByName(String name) {
         return roleDao.getRoleByName(name);
+    }
+
+    @Override
+    public HashSet<Role> getSetOfRoles(String[] roleNames) {
+        return roleDao.getSetOfRoles(roleNames);
     }
 }
