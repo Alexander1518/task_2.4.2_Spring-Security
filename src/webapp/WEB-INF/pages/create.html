@@ -31,16 +31,16 @@
   <br/>
   <br/>
   <label>Role:
-    <select multiple="multiple" name="role" required="required">
-      <option value="${role}"></option>
-      <option selected value="${role}"></option>
-    </select>
+    <th:block th:each="role: ${roles}">
+              <input type="checkbox" name="nameRoles"
+                     th:text="${role.name}" th:value="${role.name}"/>
+            </th:block>
     <br/>
     <br/>
     <input type="submit" value="CREATE"/>
   </label>
 </form>
-<br>
+<br/>
 <form th:method="GET" th:action="@{/admin}">
   <input type="submit" value="MAIN MENU">
 </form>
@@ -49,6 +49,5 @@
   <input type="submit" value="LOGOUT">
 </form>
 <br/>
-
 </body>
 </html>

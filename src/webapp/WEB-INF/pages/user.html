@@ -29,6 +29,9 @@
         <td>Surname</td>
         <td>Email</td>
         <td>Age</td>
+        <div class="row" th:if="${#request.isUserInRole('ADMIN')}">
+            <td>Role</td>
+        </div>
     </tr>
     </thead>
 
@@ -38,17 +41,29 @@
         <td th:text="${user.getSurname()}"></td>
         <td th:text="${user.getEmail()}"></td>
         <td th:text="${user.getAge()}"></td>
+        <div class="row" th:if="${#request.isUserInRole('ADMIN')}">
+        <td th:each="role : ${user.getRoles()}">
+                <p th:text="${role.getName()}"></p></td>
+            </div>
     </tr>
 </table>
-
 <br/>
 <div style="text-align: left;">
     <form th:method="GET" th:action="@{/logout}">
         <input type="submit" value="LOGOUT">
     </form>
 </div>
+<div class="row" th:if="${#request.isUserInRole('ADMIN')}" style="text-align: right;">
+    <form th:method="GET" th:action="@{/admin/update/{id}(id=${user.id})}">
+        <input type="submit" value="UPDATE">
+    </form>
+    <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
+        <input type="submit"  value="DELETE">
+    </form>
+    <form th:method="GET" th:action="@{/admin}">
+        <input type="submit" value="MAIN MENU">
+    </form>
+</div>
 <br/>
-
-
 </body>
 </html>

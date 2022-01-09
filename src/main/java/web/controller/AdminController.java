@@ -3,14 +3,11 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,20 +29,17 @@ public class AdminController {
     }
 
     @GetMapping("/create")
-    public String createUserFrom(Model model) {
+    public String newUser(Model model) {
+        model.addAttribute("roles", roleService.listRoles());
         model.addAttribute("user", new User());
-        model.addAttribute("role", roleService.listRoles());
         return "create";
     }
 
-    @PostMapping()
-    public String createUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                          @RequestParam("role") ArrayList<Long> role) {
-        if (bindingResult.hasErrors()) {
-            return "create";
-        }
-        user.setRoles(roleService.getRoleById(role));
-        userService.addUser(user);
+        @PostMapping
+        public String createUser(@ModelAttribute("user") User user,
+                                 @RequestParam(value = "nameRoles") String [] nameRoles) {
+            user.setRoles(roleService.getSetOfRoles(nameRoles));
+            userService.addUser(user);
         return "redirect:/admin";
     }
 
@@ -55,21 +49,18 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/update")
-    public String updateUserForm(@PathVariable("id") long id, Model model) {
+    @GetMapping("/update/{id}")
+    public String editUser(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("roles",roleService.listRoles());
         model.addAttribute("user", userService.getUserById(id));
         return "update";
     }
 
-    @PostMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                         @RequestParam("role") ArrayList<Long> role) {
-        if (bindingResult.hasErrors()) {
-            return "update";
-        }
-        user.setRoles(roleService.getRoleById(role));
+    @PostMapping("/update/{id}")
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam(value = "nameRoles") String [] nameRoles) {
+        user.setRoles(roleService.getSetOfRoles(nameRoles));
         userService.updateUser(user);
-
         return "redirect:/admin";
     }
 }

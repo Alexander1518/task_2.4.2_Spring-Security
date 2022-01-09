@@ -39,7 +39,7 @@
     <td>Surname</td>
     <td>Email</td>
     <td>Age</td>
-    <td>Roles</td>
+    <td>Role</td>
     <td>Actions</td>
   </tr>
 
@@ -58,7 +58,7 @@
       <form th:method="GET" th:action="@{/user/{id}(id=${user.id})}">
         <input type="submit"  value="VIEWING">
       </form>
-      <form th:method="GET" th:action="@{/admin/{id}/update(id=${user.id})}">
+      <form th:method="GET" th:action="@{/admin/update/{id}(id=${user.id})}">
         <input type="submit"  value="UPDATE">
       </form>
       <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">

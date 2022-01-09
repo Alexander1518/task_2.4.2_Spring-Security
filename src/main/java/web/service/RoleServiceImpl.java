@@ -5,10 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.RoleDao;
 import web.model.Role;
-
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class RoleServiceImpl implements RoleService {
@@ -28,24 +26,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public void updateRole(Role role) {
-        roleDao.updateRole(role);
-    }
-
-    @Override
-    @Transactional
-    public void deleteRoleById(List<Long> id) {
-        roleDao.deleteRoleById(id);
-    }
-
-    @Override
-    @Transactional
-    public Set<Role> getRoleById(List<Long> id) {
-        return roleDao.getRoleById(id);
-    }
-
-    @Override
-    @Transactional
     public List<Role> listRoles() {
         return roleDao.listRoles();
     }
@@ -57,6 +37,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public HashSet<Role> getSetOfRoles(String[] roleNames) {
         return roleDao.getSetOfRoles(roleNames);
     }
