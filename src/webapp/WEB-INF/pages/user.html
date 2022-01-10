@@ -42,8 +42,11 @@
         <td th:text="${user.getEmail()}"></td>
         <td th:text="${user.getAge()}"></td>
         <div class="row" th:if="${#request.isUserInRole('ADMIN')}">
-        <td th:each="role : ${user.getRoles()}">
-                <p th:text="${role.getName()}"></p></td>
+            <td>
+                <div th:each="role : ${user.getRoles()}">
+                    <p th:text="${role.getName()}"></p>
+                </div>
+            </td>
             </div>
     </tr>
 </table>
