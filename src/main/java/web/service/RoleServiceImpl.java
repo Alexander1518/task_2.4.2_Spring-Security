@@ -7,6 +7,7 @@ import web.dao.RoleDao;
 import web.model.Role;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class RoleServiceImpl implements RoleService {
@@ -17,11 +18,28 @@ public class RoleServiceImpl implements RoleService {
         this.roleDao = roleDao;
     }
 
-
     @Override
     @Transactional
     public void addRole(Role role) {
         roleDao.addRole(role);
+    }
+
+    @Override
+    @Transactional
+    public void updateRole(Role role) {
+        roleDao.updateRole(role);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRoleById(List<Long> id) {
+        roleDao.deleteRoleById(id);
+    }
+
+    @Override
+    @Transactional
+    public Set<Role> getRoleById(List<Long> id) {
+        return roleDao.getRoleById(id);
     }
 
     @Override
